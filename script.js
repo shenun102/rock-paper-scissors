@@ -14,3 +14,21 @@ const getComputerChoice = function () {
 
 console.log(getComputerChoice());
 
+const getHumanChoice = function () {
+  const humanChoice = parseInt(
+    prompt(`
+    Pick a number 1, 2 or 3
+    1: Rock
+    2: Paper
+    3: Scissors`)
+  );
+  if (humanChoice === 1) {
+    return "Rock";
+  } else if (humanChoice === 2) {
+    return "Paper";
+  } else if (humanChoice === 3) {
+    return "Scissors";
+  }
+};
+
+console.log(getHumanChoice());
