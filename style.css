@@ -38,6 +38,12 @@ body {
   font-size: 32px;
 }
 
+.human-select,
+.computer-select {
+  display: flex;
+  justify-content: center;
+}
+
 .container-4 {
   display: flex;
   flex-direction: column;
