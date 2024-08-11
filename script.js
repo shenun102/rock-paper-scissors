@@ -13,55 +13,53 @@ const comChoice = document.querySelector(".c-choice");
 // Rock Paper Scissors Functionality
 // Function to generate computer choice
 const getComputerChoice = function () {
-  const num = Math.floor(Math.random() * 3) + 1;
-  if (num === 1) {
-    return "rock";
-  } else if (num === 2) {
-    return "paper";
-  } else if (num === 3) {
-    return "scissors";
-  }
+  const choices = ["Rock", "Paper", "Scissors"]; // Choice index 0, 1 ,2
+  return choices[Math.floor(Math.random() * choices.length)];
 };
 
 const playGame = function () {
   // Declare score and final result variables
   let humanScore = 0;
   let computerScore = 0;
-  let finalScore;
-  let round;
+  let round = 1;
 
   // Function to play a round
   const playRound = function (computerChoice, humanChoice) {
     let log;
-    const human = humanChoice.toLowerCase();
+
+    console.log(round);
+    round++;
+
+    const human = firstLetterLower(humanChoice);
+    const computer = firstLetterLower(computerChoice);
 
     console.log(`The computer chose (${computerChoice})`);
     console.log(`You chose (${human})`);
 
     // Outcomes of rock paper scissors
-    if (computerChoice === "rock" && human === "paper") {
+    if (computer === "rock" && human === "paper") {
       humanScore++;
       log = `You win! Paper beats Rock`;
-    } else if (computerChoice === "rock" && human === "scissors") {
+    } else if (computer === "rock" && human === "scissors") {
       computerScore++;
       log = `You lose! Rock beats scissors`;
-    } else if (computerChoice === "paper" && human === "rock") {
+    } else if (computer === "paper" && human === "rock") {
       computerScore++;
       log = `You lose! Paper beats Rock`;
-    } else if (computerChoice === "paper" && human === "scissors") {
+    } else if (computer === "paper" && human === "scissors") {
       humanScore++;
       log = `You win! Scissors beats Paper`;
-    } else if (computerChoice === "scissors" && human === "rock") {
+    } else if (computer === "scissors" && human === "rock") {
       humanScore++;
       log = `You win! Rock beats Scissors`;
-    } else if (computerChoice === "scissors" && human === "paper") {
+    } else if (computer === "scissors" && human === "paper") {
       computerScore++;
       log = `You lose! Scissors beats Paper`;
     } else {
       log = `Draw!`;
     }
     result.textContent = log;
-    score.textContent = `${humanScore}:${computerScore}`;
+    score.textContent = `${humanScore} : ${computerScore}`;
     humChoice.textContent = humanChoice;
     comChoice.textContent = computerChoice;
   };
@@ -73,25 +71,26 @@ const playGame = function () {
       playAgain.classList.toggle("display");
 
     let id = e.target.classList.value;
-    console.log(id);
+    // console.log(id);
 
-    if (e.target.matches("button"))
-      if (humanScore < 5 && computerScore < 5) {
-        if (id === "btn-rock") {
-          playRound(getComputerChoice(), "Rock");
-        } else if (id === "btn-paper") {
-          playRound(getComputerChoice(), "Paper");
-        } else if (id === "btn-scissors") {
-          playRound(getComputerChoice(), "Scissors");
-        }
-      } else {
-        // Determine the final victor by comparing scores
-        if (humanScore > computerScore) {
-          result.textContent = `You, the player win!`;
-        } else if (humanScore < computerScore) {
-          result.textContent = `You lost to the Computer!`;
-        }
+    if (!e.target.matches("button") || humanScore >= 5 || computerScore >= 5) {
+      return;
+    } else {
+      // Determine the final victor by comparing scores
+      if (humanScore > computerScore) {
+        result.textContent = `You, the player win!`;
+      } else if (humanScore < computerScore) {
+        result.textContent = `You lost to the Computer!`;
       }
+    }
+
+    if (id === "btn-rock") {
+      playRound(getComputerChoice(), "Rock");
+    } else if (id === "btn-paper") {
+      playRound(getComputerChoice(), "Paper");
+    } else if (id === "btn-scissors") {
+      playRound(getComputerChoice(), "Scissors");
+    }
   });
 };
 
@@ -102,3 +101,9 @@ playAgain.addEventListener("click", (e) => {
 });
 
 playGame();
+
+function firstLetterLower(string) {
+  return string[0].toLowerCase() + string.slice(1);
+}
+
+console.log(firstLetterLower("Hello"));
