@@ -62,6 +62,14 @@ const playGame = function () {
     score.textContent = `${humanScore} : ${computerScore}`;
     humChoice.textContent = humanChoice;
     comChoice.textContent = computerChoice;
+
+    // Determine the final victor by comparing scores
+    if (humanScore === 5) {
+      result.textContent = `You, the player win!`;
+    } else if (computerScore === 5) {
+      result.textContent = `You lost to the Computer!`;
+    }
+    return;
   };
 
   // Rock Paper Scissors UI
@@ -73,16 +81,8 @@ const playGame = function () {
     let id = e.target.classList.value;
     // console.log(id);
 
-    if (!e.target.matches("button") || humanScore >= 5 || computerScore >= 5) {
+    if (!e.target.matches("button") || humanScore >= 5 || computerScore >= 5)
       return;
-    } else {
-      // Determine the final victor by comparing scores
-      if (humanScore > computerScore) {
-        result.textContent = `You, the player win!`;
-      } else if (humanScore < computerScore) {
-        result.textContent = `You lost to the Computer!`;
-      }
-    }
 
     if (id === "btn-rock") {
       playRound(getComputerChoice(), "Rock");
@@ -105,5 +105,7 @@ playGame();
 function firstLetterLower(string) {
   return string[0].toLowerCase() + string.slice(1);
 }
+
+function checkWinner() {}
 
 console.log(firstLetterLower("Hello"));
