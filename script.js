@@ -47,6 +47,7 @@ const playGame = function () {
 
   // Function to play a round
   const playRound = function (computerChoice, humanChoice) {
+    let log;
     const human = humanChoice.toLowerCase();
     console.log(`The computer chose (${computerChoice})`);
     console.log(`You chose (${human})`);
@@ -54,38 +55,33 @@ const playGame = function () {
     // Outcomes of rock paper scissors
     if (computerChoice === "rock" && human === "paper") {
       humanScore++;
-      result.textContent = `You won! The score is:`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You win! Paper beats Rock`;
       // console.log(`You won! The score is ${humanScore}:${computerScore}`);
     } else if (computerChoice === "rock" && human === "scissors") {
       computerScore++;
-      result.textContent = `You lost! The score is:`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You lose! Rock beats scissors`;
       // console.log(`You lost! The score is ${humanScore}:${computerScore}`);
     } else if (computerChoice === "paper" && human === "rock") {
       computerScore++;
-      result.textContent = `You lost! The score is:`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You lose! Paper beats Rock`;
       // console.log(`You lost! The score is ${humanScore}:${computerScore}`);
     } else if (computerChoice === "paper" && human === "scissors") {
       humanScore++;
-      result.textContent = `You won! The score is:`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You win! Scissors beats Paper`;
       // console.log(`You won! The score is ${humanScore}:${computerScore}`);
     } else if (computerChoice === "scissors" && human === "rock") {
       humanScore++;
-      result.textContent = `You won! The score is:`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You win! Rock beats Scissors`;
       // console.log(`You won! The score is ${humanScore}:${computerScore}`);
     } else if (computerChoice === "scissors" && human === "paper") {
       computerScore++;
-      result.textContent = `You lost! The score is`;
-      score.textContent = `${humanScore}:${computerScore}`;
+      log = `You lose! Scissors beats Paper`;
       // console.log(`You lost! The score is ${humanScore}:${computerScore}`);
     } else {
-      result.textContent = `Its a draw! The score is:`;
-      console.log(`Draw!`);
+      log = `Draw!`
     }
+    result.textContent = log + ` the Score is:`;
+    score.textContent = `${humanScore}:${computerScore}`;
   };
 
   // Rock Paper Scissors UI
